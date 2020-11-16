@@ -76,8 +76,8 @@ namespace UDS.FeatureRequest
             }
             catch (InvalidPluginExecutionException ex)
             {
-                tracer.Trace("An feature occured in UDS.featureRequest.WorkHoursTotal plugin. " + ex.Message);
-                throw new InvalidPluginExecutionException("An feature occured in UDS.featureRequest.WorkHoursTotal plugin. " + ex.Message);
+                tracer.Trace("An feature occured in UDS.FeatureRequest.WorkHoursTotal plugin. " + ex.Message);
+                throw new InvalidPluginExecutionException("An feature occured in UDS.FeatureRequest.WorkHoursTotal plugin. " + ex.Message);
             }
         }
 

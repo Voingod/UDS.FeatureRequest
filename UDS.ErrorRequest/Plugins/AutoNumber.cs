@@ -10,7 +10,7 @@ using Microsoft.Xrm.Sdk.Client;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 
-namespace UDS.ErrorRequest
+namespace UDS.FeatureRequest
 {
     public class AutoNumber : IPlugin
     {
@@ -28,7 +28,7 @@ namespace UDS.ErrorRequest
                 Entity config = GetCounterEntity(service);
 
                 if (!config.Attributes.Contains("uds_value"))
-                    throw new InvalidPluginExecutionException("An error occurred in UDS.ErrorRequest.AutoNumber plugin: Check AUTONUMBER record.");
+                    throw new InvalidPluginExecutionException("An error occurred in UDS.FeatureRequest.AutoNumber plugin: Check AUTONUMBER record.");
 
                 string entityid = string.Empty;
 
@@ -73,29 +73,23 @@ namespace UDS.ErrorRequest
             }
             catch (InvalidPluginExecutionException ex)
             {
-                throw new InvalidPluginExecutionException("An error occurred in UDS.ErrorRequest.AutoNumber plugin." + ex.Message);
+                throw new InvalidPluginExecutionException("An error occurred in UDS.FeatureRequest.AutoNumber plugin." + ex.Message);
             }
         }
 
         public Entity GetCounterEntity(IOrganizationService service)
         {
-            QueryExpression query = new QueryExpression("uds_autonumber")
+            QueryExpression query = new QueryExpression("uds_autonumbersfeaturerequest")
             {
                 ColumnSet = new ColumnSet(true),
                 NoLock = false,
-                Criteria = new FilterExpression()
-                {
-                    Conditions =
-                    {
-                        new ConditionExpression("uds_entity", ConditionOperator.Equal, "Feature request")
-                    }
-                }
+                Criteria = new FilterExpression() { }
             };
             Entity autoNumber = service.RetrieveMultiple(query)?.Entities?.FirstOrDefault();
 
             if (autoNumber == null)
             {
-                autoNumber = new Entity("uds_autonumber");
+                autoNumber = new Entity("uds_autonumbersfeaturerequest");
                 autoNumber["uds_value"] = 0;
                 autoNumber["uds_entity"] = "Feature request";
                 service.Create(autoNumber);

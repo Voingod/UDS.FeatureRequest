@@ -86,6 +86,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Plugins\AutoNumberSingleton.cs" />
     <Compile Include="Plugins\AutoNumber.cs" />
     <Compile Include="Plugins\CheckWorkHours.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
